@@ -13,13 +13,20 @@
         android:theme="@style/Theme.ClapApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".VideoViewDemo"
+            android:exported="true"
+            android:label="@string/title_activity_video_view_demo"
+            android:theme="@style/Theme.ClapApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package com.example.clapapp
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         val play  = findViewById<FloatingActionButton>(R.id.fabPlay)
         val pause = findViewById<FloatingActionButton>(R.id.fabPause)
         val stop = findViewById<FloatingActionButton>(R.id.fabStop)
+
+        val btnVideo = findViewById<Button>(R.id.videoBtn)
+        btnVideo.setOnClickListener {
+            val intent = Intent(this, VideoViewDemo::class.java)
+            startActivity(intent)
+        }
 
         seekBar = findViewById(R.id.audioSB)
         handler = Handler(Looper.getMainLooper())
