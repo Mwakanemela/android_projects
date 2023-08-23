@@ -25,7 +25,7 @@ class MainRepository @Inject constructor(
     private var remoteView:SurfaceViewRenderer?=null
 
     fun login(username: String, password: String, isDone: (Boolean, String?) -> Unit) {
-        firebaseClient.login(username, password, isDone)
+       // firebaseClient.login(username, password, isDone)
     }
 
     fun observeUsersStatus(status: (List<Pair<String, String>>) -> Unit) {

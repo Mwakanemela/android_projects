@@ -5,11 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.media.projection.MediaProjectionManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.example.appchat.R
 import com.example.appchat.videocall.service.MainService
+import com.example.appchat.videocall.service.MainServiceRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +21,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
+import com.example.appchat.databinding.ActivityCallBinding
+import com.example.appchat.videocall.utils.convertToHumanTime
+import com.example.appchat.videocall.webrtc.RTCAudioManager
 
 @AndroidEntryPoint
 class CallActivity : AppCompatActivity(), MainService.EndCallListener {
@@ -64,6 +70,7 @@ class CallActivity : AppCompatActivity(), MainService.EndCallListener {
     private fun init(){
         intent.getStringExtra("target")?.let {
             this.target = it
+            Log.i("MYDETAILS", "TARGET is ${it}")
         }?: kotlin.run {
             finish()
         }
@@ -73,6 +80,7 @@ class CallActivity : AppCompatActivity(), MainService.EndCallListener {
 
         views.apply {
             callTitleTv.text = "In call with $target"
+            Log.i("MYDETAILS", "In Call with ${target}")
             CoroutineScope(Dispatchers.IO).launch {
                 for (i in 0..3600){
                     delay(1000)
@@ -91,6 +99,8 @@ class CallActivity : AppCompatActivity(), MainService.EndCallListener {
             }
             MainService.remoteSurfaceView = remoteView
             MainService.localSurfaceView = localView
+            Log.i("MYDETAILS", "Caller ${isCaller}")
+            Log.i("MYDETAILS", "Target ${target}")
             serviceRepository.setupViews(isVideoCall,isCaller,target!!)
 
             endCallButton.setOnClickListener {

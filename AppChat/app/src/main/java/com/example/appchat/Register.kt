@@ -44,6 +44,7 @@ class Register : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     addUserToDatabase(name, email, mAuth.currentUser?.uid!!)
+                    addUserToDatabaseForVideoCall(mAuth.currentUser?.uid!!)
                     val intent = Intent(this@Register, MainActivity::class.java).apply {
                         putExtra("username",edtName.text.toString())
                     }
@@ -59,5 +60,11 @@ class Register : AppCompatActivity() {
     private fun addUserToDatabase(name: String, email: String, uid: String) {
         mDbRef = FirebaseDatabase.getInstance().getReference()
         mDbRef.child("chat_users").child(uid).setValue(User(name, email, uid))
+    }
+
+    private fun addUserToDatabaseForVideoCall(uid: String) {
+       // mDbRef = FirebaseDatabase.getInstance().getReference()
+        val dbRef = FirebaseDatabase.getInstance().getReference("video_users")
+        dbRef.child(uid).setValue("")
     }
 }

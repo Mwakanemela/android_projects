@@ -1,24 +1,21 @@
 package com.example.appchat
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.appchat.databinding.ActivityLoginBinding
+import com.example.appchat.calling.repository.MainRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.permissionx.guolindev.PermissionX
 
 class Login : AppCompatActivity() {
 
@@ -28,7 +25,7 @@ class Login : AppCompatActivity() {
     private lateinit var btnRegister: Button
     private lateinit var mAuth: FirebaseAuth
     private var username: String? = null
-
+    var mainRepository: MainRepository? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -39,6 +36,8 @@ class Login : AppCompatActivity() {
         supportActionBar?.hide()
 
         mAuth = FirebaseAuth.getInstance()
+
+
 
         // Retrieve user's name from Realtime Database
         val database = FirebaseDatabase.getInstance()
@@ -83,13 +82,30 @@ class Login : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this@Login, MainActivity::class.java).apply {
-                        putExtra("username",username)
-                        Log.i("GetUsername", "Your user name is $username")
-                    }
 
-                    startActivity(intent)
-                } else {
+                    mainRepository = MainRepository.getInstance()
+                    PermissionX.init(this)
+                        .permissions(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
+                        .request { allGranted: Boolean, grantedList: List<String?>?, deniedList: List<String?>? ->
+                            if (allGranted) {
+                                //login to firebase here
+                                mainRepository!!.login(
+                                    mAuth.currentUser?.uid, applicationContext
+                                ) {
+                                    //if success then we want to move to call activity
+                                    val intent = Intent(this@Login, MainActivity::class.java).apply {
+                                        putExtra("username",username)
+                                        Log.i("GetUsername", "Your user name is $username")
+                                    }
+
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+
+
+
+            } else {
                     Toast.makeText(this@Login, "User nah Exist", Toast.LENGTH_SHORT).show()
                 }
             }
