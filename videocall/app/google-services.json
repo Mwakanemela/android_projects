@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "254600214695",
+    "firebase_url": "https://chatapp-c696a-default-rtdb.firebaseio.com",
+    "project_id": "chatapp-c696a",
+    "storage_bucket": "chatapp-c696a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254600214695:android:0faf2575ed8de37a748382",
+        "android_client_info": {
+          "package_name": "com.example.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254600214695-4t7mb32d3qfcfchfijskptv9aob9m2e8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb8EmYOL01YQ331WTycmzz6Z5xhGM4-cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254600214695-4t7mb32d3qfcfchfijskptv9aob9m2e8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254600214695:android:74630527fa1c260f748382",
+        "android_client_info": {
+          "package_name": "com.example.videocall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254600214695-4t7mb32d3qfcfchfijskptv9aob9m2e8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb8EmYOL01YQ331WTycmzz6Z5xhGM4-cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254600214695-4t7mb32d3qfcfchfijskptv9aob9m2e8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

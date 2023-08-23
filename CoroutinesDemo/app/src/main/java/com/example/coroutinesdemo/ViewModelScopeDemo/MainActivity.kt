@@ -2,17 +2,11 @@ package com.example.coroutinesdemo.ViewModelScopeDemo
 
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.coroutinesdemo.R
-import com.example.coroutinesdemo.databinding.ActivityMain2Binding
+
 
 class MainActivity : AppCompatActivity() {
 
