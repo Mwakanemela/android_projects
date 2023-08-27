@@ -24,5 +24,5 @@ class AppModule {
     fun provideDataBaseInstance(): FirebaseDatabase = FirebaseDatabase.getInstance()
 
     @Provides
-    fun provideDatabaseReference(db: FirebaseDatabase): DatabaseReference = db.reference
+    fun provideDatabaseReference(db: FirebaseDatabase): DatabaseReference = db.getReference("chat_users")
 }

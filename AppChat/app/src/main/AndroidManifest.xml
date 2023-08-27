@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -29,7 +34,7 @@
         </activity>
         <activity
             android:name=".ChatActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_chat"
             android:theme="@style/Theme.AppChat" />
         <activity
@@ -50,14 +55,19 @@
             android:theme="@style/Theme.AppChat" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <activity android:name=".videocall.ui.MainActivity"
             android:exported="true"/>
+        <activity android:name=".calling.ui.CallActivity"
+            android:exported="true"
+            />
         <activity android:name=".videocall.ui.CallActivity"
             android:exported="true"/>
         <activity android:name=".videocall.ui.CloseActivity"
             android:exported="true"/>
+<!--        <activity android:name=".videocall.ui.LoginActivity"-->
+<!--            android:exported="true"/>-->
         <receiver android:name=".videocall.service.MainServiceReceiver"/>
         <service android:name=".videocall.service.MainService"
             android:foregroundServiceType="mediaProjection"/>

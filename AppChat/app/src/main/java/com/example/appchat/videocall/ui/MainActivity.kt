@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.Listener, Main
 
     private fun init() {
         username = intent.getStringExtra("username")
+        Log.i("MYDETAILS", "This is call username i have recieved ${username}")
         if (username == null) finish()
         //1. observe other users status
         subscribeObservers()
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.Listener, Main
                         incomingCallLayout.isVisible = false
                         //create an intent to go to video call activity
                         startActivity(Intent(this@MainActivity,CallActivity::class.java).apply {
+                            Log.i("MYDETAILS", "model sender = ${model.sender}")
                             putExtra("target",model.sender)
                             putExtra("isVideoCall",isVideoCall)
                             putExtra("isCaller",false)
