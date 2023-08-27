@@ -1,5 +1,6 @@
 package com.example.firebaserealtimedb
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.firebaserealtimedb.databinding.ActivityMainBinding
@@ -12,5 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root);
+
+        binding.insertDataBtn.setOnClickListener {
+            val intent = Intent(this, InsertDataActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
