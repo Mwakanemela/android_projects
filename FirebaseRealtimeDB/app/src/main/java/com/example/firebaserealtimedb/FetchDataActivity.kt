@@ -1,5 +1,6 @@
 package com.example.firebaserealtimedb
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -47,6 +48,17 @@ class FetchDataActivity : AppCompatActivity() {
 
                     val mAdapter = EmployeeAdapter(employeeList)
                     binding.rvEmp.adapter = mAdapter
+                    mAdapter.setOnItemClickListener(object : EmployeeAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            val intent = Intent(this@FetchDataActivity, EmployeeDetailsActivity::class.java)
+                            intent.putExtra("empId", employeeList[position].employeeId)
+                            intent.putExtra("empName", employeeList[position].employeeName)
+                            intent.putExtra("empAge", employeeList[position].employeeAge)
+                            intent.putExtra("empSalary", employeeList[position].employeeSalary)
+                            startActivity(intent)
+                        }
+
+                    })
                     binding.rvEmp.visibility = View.VISIBLE
                     binding.tvLoadingData.visibility = View.GONE
                 }

@@ -9,9 +9,18 @@ import com.example.firebaserealtimedb.EmployeeModel
 import com.example.firebaserealtimedb.R
 
 class EmployeeAdapter(private val employeeList:ArrayList<EmployeeModel>): RecyclerView.Adapter<EmployeeAdapter.ViewHolder>() {
+
+    private lateinit var mListener: onItemClickListener
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+    fun setOnItemClickListener(clickListener: onItemClickListener) {
+        mListener = clickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeAdapter.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_data_item, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: EmployeeAdapter.ViewHolder, position: Int) {
@@ -23,8 +32,13 @@ class EmployeeAdapter(private val employeeList:ArrayList<EmployeeModel>): Recycl
         return employeeList.size
     }
 
-
-    class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView:View, clickListener: onItemClickListener): RecyclerView.ViewHolder(itemView) {
             val employeeNameTv:TextView = itemView.findViewById(R.id.tvEmpName)
+
+        init {
+            itemView.setOnClickListener {
+                clickListener.onItemClick(adapterPosition)
+            }
+        }
     }
 }
