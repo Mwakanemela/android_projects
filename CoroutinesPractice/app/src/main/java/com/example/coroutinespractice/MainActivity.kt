@@ -3,30 +3,44 @@ package com.example.coroutinespractice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.coroutinespractice.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        GlobalScope.launch{
 
-            val networkCallAnswer = doNetworkCall()
-            val networkCallAnswer2 = doNetworkCall2()
+        GlobalScope.launch(Dispatchers.IO){
 
-            Log.d(TAG, networkCallAnswer)
-            Log.d(TAG, networkCallAnswer2)
+            Log.d(TAG, "in coroutine dispatchers io in ${Thread.currentThread().name}")
+
+            withContext(Dispatchers.Main) {
+                Log.d(TAG, "setting text in ${Thread.currentThread().name}")
+                val networkCallAnswer = doNetworkCall()
+
+                binding.tv.text= networkCallAnswer
+
+            }
+
+
+
         }
 
 
     }
 
-    suspend fun doNetworkCall():String {
+    private suspend fun doNetworkCall():String {
         delay(3000L)
         return "Answer from network call 1"
     }
