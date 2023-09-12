@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
@@ -20,24 +21,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        GlobalScope.launch(Dispatchers.IO){
-
-            Log.d(TAG, "in coroutine dispatchers io in ${Thread.currentThread().name}")
-
-            withContext(Dispatchers.Main) {
-                Log.d(TAG, "setting text in ${Thread.currentThread().name}")
-                val networkCallAnswer = doNetworkCall()
-
-                binding.tv.text= networkCallAnswer
-
+        Log.d(TAG, "Before runBlocking")
+        runBlocking {
+            launch(Dispatchers.IO) {
+                delay(3000L)
+                Log.d(TAG, "IO Coroutine")
             }
-
-
-
+            Log.d(TAG, "Start run blocking")
+            delay(5000L)
+            Log.d(TAG, "finished runBlocking")
         }
-
-
+        Log.d(TAG, "After runBlocking")
     }
 
     private suspend fun doNetworkCall():String {
