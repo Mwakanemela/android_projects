@@ -2,6 +2,7 @@ package com.example.recyclerviewexampleone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -39,10 +40,19 @@ class MainActivity : AppCompatActivity() {
 
        recyclerView = findViewById(R.id.myRecyclerView)
 
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        itemArrayList = arrayListOf()
        getData()
+
+        recyclerView.adapter = RecyclerViewAdapter(itemArrayList)
     }
 
     private fun getData() {
 
+        for(i in names.indices) {
+            val software = Software(imageId[i], names[i], description[i])
+            itemArrayList.add(software)
+        }
     }
 }
