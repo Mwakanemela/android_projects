@@ -38,5 +38,17 @@ class NestedRecyclerViewActivity : AppCompatActivity() {
 
 
         parentItemsList.add(ParentDataClass("Software", childItemsList))
+
+        val childItemsList2 = ArrayList<ChildDataClass>()
+
+        childItemsList2.add(ChildDataClass(R.drawable.image5))
+        childItemsList2.add(ChildDataClass(R.drawable.image4))
+        childItemsList2.add(ChildDataClass(R.drawable.image2))
+        childItemsList2.add(ChildDataClass(R.drawable.image1))
+        childItemsList2.add(ChildDataClass(R.drawable.image2))
+        childItemsList2.add(ChildDataClass(R.drawable.image1))
+
+
+        parentItemsList.add(ParentDataClass("Software Engineer", childItemsList2))
     }
 }
