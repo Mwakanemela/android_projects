@@ -2,6 +2,7 @@ package com.example.recyclerviewexampleone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -21,8 +22,32 @@ class MainActivity : AppCompatActivity() {
            R.drawable.image3,
            R.drawable.image4,
            R.drawable.image5,
+           R.drawable.image1,
+           R.drawable.image3,
+           R.drawable.image4,
+           R.drawable.image1,
+           R.drawable.image2,
+           R.drawable.image3,
+
+           R.drawable.image1,
+           R.drawable.image2,
+           R.drawable.image3,
+           R.drawable.image4,
+           R.drawable.image5,
        )
        names = arrayOf(
+           "sw1",
+           "sw2",
+           "sw3",
+           "sw4",
+           "sw5",
+           "sw5",
+           "sw3",
+           "sw4",
+           "sw1",
+           "sw2",
+           "sw3",
+
            "sw1",
            "sw2",
            "sw3",
@@ -36,11 +61,23 @@ class MainActivity : AppCompatActivity() {
            "Software Engineer Programmer",
            "Software Engineer Programmer",
            "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
        )
 
        recyclerView = findViewById(R.id.myRecyclerView)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
         itemArrayList = arrayListOf()
        getData()
