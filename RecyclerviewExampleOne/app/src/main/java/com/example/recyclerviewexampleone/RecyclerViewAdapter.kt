@@ -1,5 +1,6 @@
 package com.example.recyclerviewexampleone
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,12 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         val context = holder.itemRow.context
         holder.itemRow.setOnClickListener {
             Toast.makeText(context, "${currentItem.name} clicked", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(it.context, SecondActivity::class.java)
+            intent.putExtra("name", currentItem.name)
+            intent.putExtra("desc", currentItem.description)
+            intent.putExtra("image", currentItem.imageTitle)
+            context.startActivity(intent)
         }
 
         holder.itemRow.setOnLongClickListener(View.OnLongClickListener {
