@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
        recyclerView = findViewById(R.id.myRecyclerView)
 
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
         itemArrayList = arrayListOf()
        getData()
