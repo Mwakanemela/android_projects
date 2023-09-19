@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapter(private val softwareList:ArrayList<Software>):
@@ -15,6 +17,7 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         val image = itemView.findViewById<ImageView>(R.id.imageTitle)
         val nameTv = itemView.findViewById<TextView>(R.id.tvName)
         val description = itemView.findViewById<TextView>(R.id.tvDescription)
+        val itemRow = itemView.findViewById<ConstraintLayout>(R.id.constrainLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,5 +35,15 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         holder.description.text = currentItem.description
         holder.image.setImageResource(currentItem.imageTitle)
         holder.nameTv.text = currentItem.name
+
+        val context = holder.itemRow.context
+        holder.itemRow.setOnClickListener {
+            Toast.makeText(context, "${currentItem.name} clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        holder.itemRow.setOnLongClickListener(View.OnLongClickListener {
+            Toast.makeText(context, "${currentItem.name} long clicked", Toast.LENGTH_SHORT).show()
+            return@OnLongClickListener true
+        })
     }
 }
