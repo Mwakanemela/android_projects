@@ -2,6 +2,7 @@ package com.example.recyclerviewexampleone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
        recyclerView = findViewById(R.id.myRecyclerView)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.setHasFixedSize(true)
         itemArrayList = arrayListOf()
        getData()

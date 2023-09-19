@@ -20,12 +20,12 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         val image = itemView.findViewById<ImageView>(R.id.imageTitle)
         val nameTv = itemView.findViewById<TextView>(R.id.tvName)
         val description = itemView.findViewById<TextView>(R.id.tvDescription)
-        val itemRow: ConstraintLayout = itemView.findViewById(R.id.constrainLayout)
+        val itemRow: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
         val cardView: CardView = itemView.findViewById(R.id.cardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
         return ViewHolder(itemView)
     }
 
