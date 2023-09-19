@@ -4,9 +4,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,7 +20,8 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         val image = itemView.findViewById<ImageView>(R.id.imageTitle)
         val nameTv = itemView.findViewById<TextView>(R.id.tvName)
         val description = itemView.findViewById<TextView>(R.id.tvDescription)
-        val itemRow = itemView.findViewById<ConstraintLayout>(R.id.constrainLayout)
+        val itemRow: ConstraintLayout = itemView.findViewById(R.id.constrainLayout)
+        val cardView: CardView = itemView.findViewById(R.id.cardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +51,9 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
             context.startActivity(intent)
         }
 
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(
+            holder.cardView.context, R.anim.slide_in
+        ))
         holder.itemRow.setOnLongClickListener(View.OnLongClickListener {
             Toast.makeText(context, "${currentItem.name} long clicked", Toast.LENGTH_SHORT).show()
             return@OnLongClickListener true

@@ -21,8 +21,32 @@ class MainActivity : AppCompatActivity() {
            R.drawable.image3,
            R.drawable.image4,
            R.drawable.image5,
+           R.drawable.image1,
+           R.drawable.image3,
+           R.drawable.image4,
+           R.drawable.image1,
+           R.drawable.image2,
+           R.drawable.image3,
+
+           R.drawable.image1,
+           R.drawable.image2,
+           R.drawable.image3,
+           R.drawable.image4,
+           R.drawable.image5,
        )
        names = arrayOf(
+           "sw1",
+           "sw2",
+           "sw3",
+           "sw4",
+           "sw5",
+           "sw5",
+           "sw3",
+           "sw4",
+           "sw1",
+           "sw2",
+           "sw3",
+
            "sw1",
            "sw2",
            "sw3",
@@ -31,6 +55,18 @@ class MainActivity : AppCompatActivity() {
        )
 
        description = arrayOf(
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+           "Software Engineer Programmer",
+
            "Software Engineer Programmer",
            "Software Engineer Programmer",
            "Software Engineer Programmer",
