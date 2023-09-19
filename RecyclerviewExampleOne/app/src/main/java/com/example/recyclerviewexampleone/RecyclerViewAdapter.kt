@@ -52,7 +52,7 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
         }
 
         holder.cardView.startAnimation(AnimationUtils.loadAnimation(
-            holder.cardView.context, R.anim.rotate_in
+            holder.cardView.context, R.anim.scale_up
         ))
         holder.itemRow.setOnLongClickListener(View.OnLongClickListener {
             Toast.makeText(context, "${currentItem.name} long clicked", Toast.LENGTH_SHORT).show()
