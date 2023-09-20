@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewexampleone.R
 
-class ParentAdapter(val parentList: List<ParentDataClass>): RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
+class ParentAdapter(var parentList: List<ParentDataClass>): RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
@@ -23,6 +23,11 @@ class ParentAdapter(val parentList: List<ParentDataClass>): RecyclerView.Adapter
 
     override fun getItemCount(): Int {
         return parentList.size
+    }
+
+    fun applySearch(parentList: List<ParentDataClass>) {
+        this.parentList = parentList
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

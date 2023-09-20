@@ -2,11 +2,14 @@ package com.example.recyclerviewexampleone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewexampleone.nestedrv.ChildDataClass
 import com.example.recyclerviewexampleone.nestedrv.ParentAdapter
 import com.example.recyclerviewexampleone.nestedrv.ParentDataClass
+import java.util.Locale
 
 class NestedRecyclerViewActivity : AppCompatActivity() {
 
@@ -21,9 +24,37 @@ class NestedRecyclerViewActivity : AppCompatActivity() {
         rvParent.layoutManager = LinearLayoutManager(this)
         val adapter = ParentAdapter(parentItemsList)
 
+        val searchView = findViewById<SearchView>(R.id.searchView)
         setData()
 
         rvParent.adapter = adapter
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                val searchList = ArrayList<ParentDataClass>()
+
+
+                if(newText != null) {
+                    for(i in parentItemsList) {
+                        if(i.title.lowercase(Locale.ROOT).contains(newText)) {
+                            searchList.add(i)
+                        }
+                    }
+                    if(searchList.isEmpty()) {
+                        Toast.makeText(this@NestedRecyclerViewActivity, "No data", Toast.LENGTH_LONG).show()
+                    }else {
+                        adapter.applySearch(searchList )
+                    }
+                }
+                return true
+            }
+
+        })
     }
 
     private fun setData() {

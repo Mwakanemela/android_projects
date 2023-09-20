@@ -25,7 +25,7 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -58,5 +58,10 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
             Toast.makeText(context, "${currentItem.name} long clicked", Toast.LENGTH_SHORT).show()
             return@OnLongClickListener true
         })
+    }
+
+    fun deleteItem(adapterPosition: Int) {
+softwareList.removeAt(adapterPosition)
+        notifyItemRemoved(adapterPosition)
     }
 }
