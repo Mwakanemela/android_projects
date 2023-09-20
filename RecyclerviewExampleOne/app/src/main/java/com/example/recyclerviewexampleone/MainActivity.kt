@@ -3,8 +3,10 @@ package com.example.recyclerviewexampleone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Collections
 
 class MainActivity : AppCompatActivity() {
     private lateinit var imageId:Array<Int>
@@ -77,12 +79,39 @@ class MainActivity : AppCompatActivity() {
 
        recyclerView = findViewById(R.id.myRecyclerView)
 
-        recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.HORIZONTAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(this,  RecyclerView.VERTICAL, false)
         recyclerView.setHasFixedSize(true)
         itemArrayList = arrayListOf()
        getData()
 
+
         recyclerView.adapter = RecyclerViewAdapter(itemArrayList)
+
+        val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+        ){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                source: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val sourcePosition = source.adapterPosition
+                val targetPosition = target.adapterPosition
+
+                Collections.swap(itemArrayList,sourcePosition, targetPosition)
+
+                recyclerView.adapter?.notifyItemMoved(sourcePosition, targetPosition)
+
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun getData() {
