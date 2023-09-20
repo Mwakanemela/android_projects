@@ -1,12 +1,16 @@
 package com.example.recyclerviewexampleone
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.graphics.Canvas
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import java.util.Collections
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var imageId:Array<Int>
@@ -88,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = RecyclerViewAdapter(itemArrayList)
 
         val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT
         ){
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -106,8 +110,87 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                TODO("Not yet implemented")
+                //RecyclerViewAdapter(itemArrayList).deleteItem(viewHolder.adapterPosition)
+                val position = viewHolder.adapterPosition
+
+                // Remove the item from the ArrayList
+                itemArrayList.removeAt(position)
+
+                // Notify the adapter of the item removal
+                recyclerView.adapter?.notifyItemRemoved(position)
             }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+
+                RecyclerViewSwipeDecorator.Builder(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                    .addBackgroundColor(
+                        ContextCompat.getColor(
+                            this@MainActivity,
+                            R.color.my_background
+                        )
+                    )
+                    .addActionIcon(R.drawable.baseline_delete_24)
+                    .create()
+                    .decorate()
+            }
+//            override fun onChildDraw(
+//                c: Canvas?,
+//                recyclerView: RecyclerView?,
+//                viewHolder: RecyclerView.ViewHolder?,
+//                dX: Float,
+//                dY: Float,
+//                actionState: Int,
+//                isCurrentlyActive: Boolean
+//            ) {
+//                RecyclerViewSwipeDecorator.Builder(
+//                    c,
+//                    recyclerView,
+//                    viewHolder,
+//                    dX,
+//                    dY,
+//                    actionState,
+//                    isCurrentlyActive
+//                )
+//                    .addBackgroundColor(
+//                        ContextCompat.getColor(
+//                            this@MainActivity,
+//                            R.color.my_background
+//                        )
+//                    )
+//                    .addActionIcon(R.drawable.baseline_delete_24)
+//                    .create()
+//                    .decorate()
+//                super.onChildDraw(
+//                    c!!, recyclerView!!,
+//                    viewHolder!!, dX, dY, actionState, isCurrentlyActive
+//                )
+//            }
+
 
         })
 

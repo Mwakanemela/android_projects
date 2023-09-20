@@ -59,4 +59,9 @@ RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>()
             return@OnLongClickListener true
         })
     }
+
+    fun deleteItem(adapterPosition: Int) {
+softwareList.removeAt(adapterPosition)
+        notifyItemRemoved(adapterPosition)
+    }
 }
